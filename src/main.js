@@ -7,7 +7,7 @@ const config = {
     parent: 'game-container',
     width: 1280,
     height: 720,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#000000',
     pixelArt: false,
     scene: [
         CircuitScene,
