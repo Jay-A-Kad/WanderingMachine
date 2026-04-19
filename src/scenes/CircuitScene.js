@@ -20,6 +20,20 @@ export class CircuitScene extends Phaser.Scene {
         this.input.on('pointermove', this.onPointerMove, this);
         this.input.on('pointerup',   this.onPointerUp,   this);
         this.loadPuzzle(0);
+
+         this.time.delayedCall(400, () => {
+            this.game.events.emit('dialogue:show', {
+                lines: [
+                    "Whoah!, what is this! this looks so old and rusty",
+                    "I think I have to start from scratch start with basic foundation building for logic",
+                    "Then train the machine for Recognition, Decision Making, Memory, Planning and Adaptability",
+                    "This is gonna be make me numb...",
+                    "Maybe I can use the mach.exe model to restore the corrupted FinalMsg.txt left by Dr. Mosby",
+                    "First, I need to finish all the modules, Now lets start with Module 1",
+
+                ],
+            });
+        });
     }
 
 
@@ -214,6 +228,10 @@ export class CircuitScene extends Phaser.Scene {
     //clear round
     onWin() {
         this.completedPuzzles.add(this.puzzleIndex);
+        this.game.events.emit('progress:update', {
+            module: 0,
+            value:  (this.puzzleIndex + 1) / Puzzle1.length,
+        });
         this.time.delayedCall(400, () => {
             const isLast   = this.puzzleIndex >= Puzzle1.length - 1;
             const overlay  = this.add.rectangle(640, 360, 420, 140, 0x000000, 0.9).setStrokeStyle(1, 0x00ff77).setDepth(10);
